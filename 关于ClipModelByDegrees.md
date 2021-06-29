@@ -1,1 +1,5 @@
 
+在开始前，先了解一下clip的机制。tiles通过eastNorthUpToFixedFrame(tile.boundingSphere.center)来得到一个世界坐标系到自定义贴地的坐标系A的转换矩阵M。在官方裁剪3dtile的example中，planes的点位都是基于A的，也就是clip.modelMatrix = M。当时刚做经纬度clip的时候我是把所有的点位都转了一遍，最后突然想到实际上只需要把M的逆矩阵赋给clip.modelMatrix就相当于每个点位都转了。
+
+由于裁剪是根据方向量的切面的交集得到的，所以需要对点位排序，否则会产生无交集情况。排序方法就是用二维向量的叉乘判断凹凸多边形。如果有人有裁剪凹多边形的方法的话也可以忽略这一步。
+
