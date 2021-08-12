@@ -1,0 +1,4 @@
+具体实现还是利用turf，而geojson只是提供数据的一种方式。
+turf有随机点算法，但是只能在Bbox中使用，所以当我们拿到一个无规则面时，需要先将它的外包围Bbox求出来。然后在其中打随机点，最后遍历这些点，过滤出在原本的面中的那一部分。
+而贴地则是利用了Cesium.sampleTerrainMostDetailed求地形高度。
+模型利用ModelInstanceCollection方式加载而不是用entity，因为大批量的entity会造成卡顿，如果只是为了展示而不用单体化的话 ModelInstanceCollection是更好的选择，两种方式底层的渲染机制不同。
